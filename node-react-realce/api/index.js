@@ -17,7 +17,7 @@ mongoose
 
 const databaseSeeder = require('./databaseSeeder');
 // //database seeder routes
-app.use("./api/seed", databaseSeeder);
+app.use("/api/seed", databaseSeeder);
 
 
 app.listen(PORT || 9000, () => {

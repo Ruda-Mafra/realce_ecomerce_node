@@ -16,7 +16,7 @@ const productSchema = mongoose.Schema({
   price: { type: Number, required: true, default: 0 },
   countInStock: { type: Number, required: true, default: 0 },
 
-  reviews: [reviewSchema],
+  // reviews: [reviewSchema],
 });
 
 module.exports = mongoose.model("Product", productSchema);
