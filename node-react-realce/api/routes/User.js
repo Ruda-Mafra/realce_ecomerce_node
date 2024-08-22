@@ -1,11 +1,13 @@
 const express = require("express");
-const expressAsyncHandler = require("express-async-handler");
+const AsyncHandler = require("express-async-handler");
 const User = require("../models/User");
 const userRoute = express.Router();
+const generateToken = require("../tokenGenerate");
+const protect = require("../middleware/Auth");
 
 userRoute.post(
   "/login",
-  expressAsyncHandler(async (req, res) => {
+  AsyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (user && (await user.matchPassword(password))) {
@@ -13,7 +15,7 @@ userRoute.post(
         _id: user.id,
         name: user.name,
         isAdmin: user.isAdmin,
-        token: null,
+        token: generateToken(user._id),
         createdAt: user.createdAt,
       });
     } else {
@@ -23,13 +25,12 @@ userRoute.post(
   })
 );
 
-
 // register route
 userRoute.post(
-  '/',
-  expressAsyncHandler(async (req, res) => {
+  "/",
+  AsyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
-    const existUser = await User.findOne({ email});
+    const existUser = await User.findOne({ email });
     if (existUser) {
       res.status(400);
       throw new Error("Email Already Registered");
@@ -48,11 +49,31 @@ userRoute.post(
           isAdmin: user.isAdmin,
           createdAt: user.createdAt,
         });
-      }
-      else{
+      } else {
         res.status(400);
-        throw new Error("Invalid User Data")
+        throw new Error("Invalid User Data");
       }
+    }
+  })
+);
+
+// profile data
+userRoute.get(
+  "/profile",
+  protect,
+  AsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        createdAt: user.createdAt,
+      });
+    } else {
+      res.status(404);
+      throw new Error("User Not Found");
     }
   })
 );
