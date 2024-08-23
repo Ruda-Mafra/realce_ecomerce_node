@@ -14,52 +14,28 @@ mongoose
   .then((err) => {
     err;
   });
-
-const databaseSeeder = require('./databaseSeeder');
-const userRoute = require("./routes/User");
-
-app.use(express.json())
-// //database seeder routes
-app.use("/api/seed", databaseSeeder);
-
-// //routes for users seeder routes
-// api/users/login
-app.use("/api/users", userRoute);
-
 app.listen(PORT || 9000, () => {
   console.log(`server listening on port ${PORT}`);
 });
 
+const databaseSeeder = require("./databaseSeeder");
+const userRoute = require("./routes/User");
+const productRoute = require("./routes/Product");
 
+app.use(express.json());
 
+// //database seeder routes
+app.use("/api/seed", databaseSeeder);
 
+// //routes for users
+app.use("/api/users", userRoute);
 
-
-
-
-
-
-
-
-
-
-
-
-
+// routes for products
+app.use("/api/products", productRoute);
 
 //username: rudamafra
 //password: J0aquina
 // mongodb+srv://rudamafra:J0aquina@cluster0.slaclg1.mongodb.net/REACT-NODE-REALCE
-
-// api test test route
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
-app.get("/api/products/:id", (req, res) => {
-  const procuct = products.find((product)=>product.id == req.params.id)
-  res.json(products);
-});
-
 
 app.get("/api/users", (req, res) => {
   res.json(users);
