@@ -65,7 +65,7 @@ app.get("/api/users", (req, res) => {
   res.json(users);
 });
 
-app.get("/api/users/:id", (req, res) => {
-  const user = users.find((user)=>product.id == req.params.id)
-  res.json(users);
-});
+// app.get("/api/users/:id", (req, res) => {
+//   const user = users.find((user)=>product.id == req.params.id)
+//   res.json(users);
+// });
