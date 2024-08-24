@@ -1,5 +1,5 @@
 const express = require("express");
-const AsyncHandler = require("express-async-handler");
+const asyncHandler = require("express-async-handler");
 const User = require("../models/User");
 const userRoute = express.Router();
 const generateToken = require("../tokenGenerate");
@@ -7,7 +7,7 @@ const protect = require("../middleware/Auth");
 
 userRoute.post(
   "/login",
-  AsyncHandler(async (req, res) => {
+  asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (user && (await user.matchPassword(password))) {
@@ -28,7 +28,7 @@ userRoute.post(
 // register route
 userRoute.post(
   "/",
-  AsyncHandler(async (req, res) => {
+  asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
     const existUser = await User.findOne({ email });
     if (existUser) {
@@ -61,7 +61,7 @@ userRoute.post(
 userRoute.get(
   "/profile",
   protect,
-  AsyncHandler(async (req, res) => {
+  asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
       res.json({
@@ -82,7 +82,7 @@ userRoute.get(
 userRoute.put(
   "/profile",
   protect,
-  AsyncHandler(async (req, res) => {
+  asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
       user.name = req.body.name || user.name;

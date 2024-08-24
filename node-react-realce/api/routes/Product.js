@@ -1,11 +1,11 @@
 const express = require("express");
 const productRoute = express.Router();
-const AsyncHandler = require("express-async-handler");
+const asyncHandler = require("express-async-handler");
 const Product = require("../models/Product");
 
 productRoute.get(
   "/",
-  AsyncHandler(async (req, res) => {
+  asyncHandler(async (req, res) => {
     const products = await Product.find({});
     res.json(products);
   })
@@ -13,7 +13,7 @@ productRoute.get(
 
 productRoute.get(
   "/:id",
-  AsyncHandler(async (req, res) => {
+  asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
       res.json(product);
