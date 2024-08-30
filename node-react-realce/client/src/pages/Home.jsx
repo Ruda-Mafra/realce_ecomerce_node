@@ -7,6 +7,6 @@ const Home = () => {
       <Products></Products>
     </Layout>
   );
-};
+}
 
 export default Home;

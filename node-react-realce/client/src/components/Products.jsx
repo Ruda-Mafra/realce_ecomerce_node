@@ -5,7 +5,7 @@ import { productListAction } from "../Redux/Actions/Product";
 const Products = () => {
   const dispatch = useDispatch();
   const productListReducer = useSelector((state) => state.productListReducer);
-  const { loading, error, products = [] } = productListReducer;
+  const { loading, error, products= []} = productListReducer;
 
   useEffect(() => {
     dispatch(productListAction());
@@ -19,11 +19,12 @@ const Products = () => {
         <h1>{error}</h1>
       ) : (
         <>
+        {console.log(products)}
           <section className="text-gray-600 body-font">
             <div className="container px-5 py-24 mx-auto">
               <div className="flex flex-wrap -m-4">
                 {products.map((product) => (
-                  <div className="p-4 lg:w-1/4 md:w-1/2" key={product.id}>
+                  <div className="p-4 lg:w-1/4 md:w-1/2" key={product._id}>
                     <div className="bg-white">
                       <div className=" max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                         <div className="mt-6  gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
