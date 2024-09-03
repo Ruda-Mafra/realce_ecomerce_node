@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   productReducer,
   userLoginReducer,
   userRegisterReducer,
-  // cartReducer
+  cartReducer
 });
 
 // const middleware = [thunk];
