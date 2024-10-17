@@ -7,7 +7,7 @@ import {
 import ProductDetail from "./pages/ProductDetail";
 import Home from "./pages/Home";
 import Register from "./pages/auth/Register";
-import Login from "./pages/auth/login";
+import Login from "./pages/auth/Login";
 import { useSelector } from "react-redux";
 import Checkout from "./pages/Checkout";
 
