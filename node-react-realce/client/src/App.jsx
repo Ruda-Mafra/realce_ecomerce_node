@@ -10,6 +10,7 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import { useSelector } from "react-redux";
 import Checkout from "./pages/Checkout";
+import PlaceOrder from "./pages/PlaceOrder";
 
 function App() {
   const userLoginReducer = useSelector((state) => state.userLoginReducer);
@@ -33,6 +34,8 @@ function App() {
           ></Route>
 
           <Route exact path="/checkout" element={<Checkout />}></Route>
+          <Route exact path="/placeorder" element={<PlaceOrder />}></Route>
+
         </Routes>
       </Router>
     </>
